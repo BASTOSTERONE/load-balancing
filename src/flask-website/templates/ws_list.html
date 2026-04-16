@@ -6,8 +6,8 @@
         <h2>Serveurs web (Fichiers Statiques)</h2>
     </div>
     <hr>
-    <table class="table table-striped shadow-sm">
-        <thead class="table-dark">
+    <table class="table table-striped">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>Nom</th>
@@ -19,11 +19,11 @@
             {% for ws in webservers %}
             <tr>
                 <td>{{ ws.id }}</td> 
-                <td><strong>{{ ws.name }}</strong></td>
+                <td>{{ ws.name }}</td>
                 <td><code>{{ ws.root }}</code></td>
                 <td class="text-end">
                     <a href="/ws/{{ ws.id }}" class="btn btn-info btn-sm">Détails</a>
-                    <a href="/ws/delete/{{ ws.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer ?');">Supprimer</a>
+                    <a href="/ws/delete/{{ ws.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer {{ ws.name }} ?');">Supprimer</a>
                 </td>
             </tr>
             {% endfor %}

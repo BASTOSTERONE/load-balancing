@@ -10,8 +10,8 @@
     
     <hr>
     
-    <table class="table table-striped shadow-sm">
-        <thead class="table-dark">
+    <table class="table table-striped">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>Nom (Upstream)</th>
@@ -23,7 +23,7 @@
             {% for rp in reverseproxys %}
             <tr>
                 <td>{{ rp.id }}</td> 
-                <td><strong>{{ rp.name }}</strong></td>
+                <td>{{ rp.name }}</td>
                 <td><span class="badge bg-secondary">{{ rp.servers|length }} serveur(s)</span></td>
                 <td class="text-end">
                     <a href="/rp/{{ rp.id }}" class="btn btn-info btn-sm">Détails</a>

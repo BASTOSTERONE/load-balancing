@@ -12,7 +12,7 @@
             <tr>
                 <th>ID</th>
                 <th>Nom</th>
-                <th>Action</th>
+                <th class="text-end">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -20,9 +20,9 @@
             <tr>
                 <td>{{ lb.id }}</td> 
                 <td>{{ lb.name }}</td>
-                <td>
-                    <a href="/lb/{{ lb.id }}" class="btn btn-primary btn-sm">Voir la config</a>
-                    <a href="/lb/delete/{{ lb.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette configuration ?');">Supprimer</a>
+                <td class="text-end">
+                    <a href="/lb/{{ lb.id }}" class="btn btn-info btn-sm">Détails</a>
+                    <a href="/lb/delete/{{ lb.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer {{ lb.name }} ?');">Supprimer</a>
                 </td>
             </tr>
             {% else %}
