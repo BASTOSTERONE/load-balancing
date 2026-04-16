@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}Ajouter un load-balancer{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Ajouter un nouveau load-balancer</h2>
+    <hr>
+    
+    <form method="POST" action="/lb/create" class="mt-4" style="max-width: 500px;">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom du Load Balancer</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="ex: LB Inter 3" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="ip_bind" class="form-label">IP (server_name)</label>
+            <input type="text" class="form-control" id="ip_bind" name="ip_bind" placeholder="ex: 172.0.0.3" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="pass" class="form-label">Redirection (proxy_pass)</label>
+            <input type="text" class="form-control" id="pass" name="pass" placeholder="ex: http://localhost/C" required>
+        </div>
+        
+        <button type="submit" class="btn btn-success">Ajouter la configuration</button>
+        <a href="/lb/list" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}Liste des load-balancers{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Liste de nos Load Balancers</h2>
+    <hr>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lb in loadbalancers %}
+            <tr>
+                <td>{{ lb.id }}</td> 
+                <td>{{ lb.name }}</td>
+                <td>
+                    <a href="/lb/{{ lb.id }}" class="btn btn-primary btn-sm">Voir la config</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Aucun load-balancer trouvé.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

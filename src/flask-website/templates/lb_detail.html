@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Configuration Nginx - {{ lb.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Configuration générée : {{ lb.name }}</h2>
+    <hr>
+    
+    <div class="card bg-dark text-light p-4 shadow">
+        <pre><code>
+# Configuration générée pour : {{ lb.name }}
+
+server {
+    listen 80;
+    
+    server_name {{ lb.ip_bind }}; 
+
+    location / {
+        proxy_pass {{ lb.pass }};
+    }
+}
+        </code></pre>
+    </div>
+    
+    <a href="/lb/list" class="btn btn-secondary mt-4">Retour à la liste</a>
+</div>
+{% endblock %}
