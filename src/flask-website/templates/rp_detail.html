@@ -10,15 +10,25 @@
     <div class="card bg-dark text-light p-4 shadow">
         <pre><code>
 http {
+    server_tokens off;
+
     upstream {{ rp.name }} {
-        # lb_strategy_method;
         {% for server in rp.servers %}
         server {{ server }};
         {% endfor %}
     }
     
     server {
+        listen 80;
+
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-Content-Type-Options "nosniff";
+
         location / {
+            allow 192.168.0.0/16;
+            allow 127.0.0.1;
+            deny all;
+            
             proxy_pass http://{{ rp.name }};
         }
     }

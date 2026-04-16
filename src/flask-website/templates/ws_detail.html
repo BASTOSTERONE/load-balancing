@@ -7,8 +7,17 @@
     <div class="card bg-dark text-light p-4 shadow">
         <pre><code>
 http {
+    server_tokens off;
+
     server {
+        listen 80;
         root {{ ws.root }};
+
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-Content-Type-Options "nosniff";
+
+        allow 192.168.0.0/16;
+        deny all;
 
         location / {
             index index.html index.htm;

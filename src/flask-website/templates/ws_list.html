@@ -1,10 +1,9 @@
 {% extends "layout.html" %}
-{% block title %}Liste des Web Servers{% endblock %}
+{% block title %}Liste des web servers{% endblock %}
 {% block content %}
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Serveurs Web (Fichiers Statiques)</h2>
-        <a href="/ws/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Nouveau Serveur Web</a>
+        <h2>Serveurs web (Fichiers Statiques)</h2>
     </div>
     <hr>
     <table class="table table-striped shadow-sm">
@@ -30,5 +29,8 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="/ws/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Créer un serveur web</a>
+    </div>
 </div>
 {% endblock %}

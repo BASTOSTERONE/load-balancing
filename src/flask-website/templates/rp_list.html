@@ -5,10 +5,7 @@
 {% block content %}
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Liste de nos Reverse Proxys</h2>
-        <a href="/rp/create" class="btn btn-success">
-            <i class="bi bi-plus-lg"></i> Nouveau Reverse Proxy
-        </a>
+        <h2>Liste de nos reverse proxys</h2>
     </div>
     
     <hr>
@@ -40,5 +37,10 @@
             {% endfor %}
         </tbody>
     </table>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="/rp/create" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Créer un reverse proxy
+        </a>
+    </div>
 </div>
 {% endblock %}

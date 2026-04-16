@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
-{% block title %}Ajouter un Reverse Proxy{% endblock %}
+{% block title %}Ajouter un reverse proxy{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Ajouter un nouveau Reverse Proxy</h2>
+    <h2>Ajouter un nouveau reverse proxy</h2>
     <hr>
     
     <form method="POST" action="/rp/create" class="mt-4" style="max-width: 500px;">
@@ -22,5 +22,10 @@
         <button type="submit" class="btn btn-success">Ajouter la configuration</button>
         <a href="/rp/list" class="btn btn-secondary">Annuler</a>
     </form>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="/rp/list" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus-lg"></i> Liste reverse proxy
+        </a>
+    </div>
 </div>
 {% endblock %}
