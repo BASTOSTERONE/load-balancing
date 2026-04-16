@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Config - {{ ws.name }}{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Configuration générée : {{ ws.name }}</h2>
+    <hr>
+    <div class="card bg-dark text-light p-4 shadow">
+        <pre><code>
+http {
+    server {
+        root {{ ws.root }};
+
+        location / {
+            index index.html index.htm;
+        }
+
+        error_page 404 403 500 503 {{ ws.error_page }};
+        location = {{ ws.error_page }} {
+            root {{ ws.error_root }};
+            internal;
+        }
+    }
+}
+        </code></pre>
+    </div>
+    <a href="/ws/list" class="btn btn-secondary mt-4">Retour à la liste</a>
+</div>
+{% endblock %}

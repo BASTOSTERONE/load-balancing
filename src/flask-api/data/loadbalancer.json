@@ -12,7 +12,7 @@
         "pass": "http://localhost/B"
     },
     {
-        "name": "LB sixseven",
+        "name": "LB 67",
         "ip_bind": "172.0.0.67",
         "pass": "http://localhost/67",
         "id": 3

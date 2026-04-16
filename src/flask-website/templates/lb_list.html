@@ -22,6 +22,7 @@
                 <td>{{ lb.name }}</td>
                 <td>
                     <a href="/lb/{{ lb.id }}" class="btn btn-primary btn-sm">Voir la config</a>
+                    <a href="/lb/delete/{{ lb.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette configuration ?');">Supprimer</a>
                 </td>
             </tr>
             {% else %}
@@ -31,5 +32,10 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="/lb/create" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Creer un load-balancer
+        </a>
+    </div>
 </div>
 {% endblock %}

@@ -1,0 +1,19 @@
+[
+    {
+        "id": 1,
+        "name": "backend_app_1",
+        "servers": [
+            "server1.domain.tld",
+            "server2.domain.tld"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "backend_api",
+        "servers": [
+            "api1.univ-savoie.fr",
+            "api2.univ-savoie.fr",
+            "api3.univ-savoie.fr"
+        ]
+    }
+]

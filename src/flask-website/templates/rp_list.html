@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}Liste des Reverse Proxys{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Liste de nos Reverse Proxys</h2>
+        <a href="/rp/create" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Nouveau Reverse Proxy
+        </a>
+    </div>
+    
+    <hr>
+    
+    <table class="table table-striped shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nom (Upstream)</th>
+                <th>Nombre de serveurs</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rp in reverseproxys %}
+            <tr>
+                <td>{{ rp.id }}</td> 
+                <td><strong>{{ rp.name }}</strong></td>
+                <td><span class="badge bg-secondary">{{ rp.servers|length }} serveur(s)</span></td>
+                <td class="text-end">
+                    <a href="/rp/{{ rp.id }}" class="btn btn-info btn-sm">Détails</a>
+                    <a href="/rp/delete/{{ rp.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer {{ rp.name }} ?');">Supprimer</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center text-muted">Aucun Reverse Proxy configuré.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

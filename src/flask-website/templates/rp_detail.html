@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}Configuration Nginx - {{ rp.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Configuration générée : {{ rp.name }}</h2>
+    <hr>
+    
+    <div class="card bg-dark text-light p-4 shadow">
+        <pre><code>
+http {
+    upstream {{ rp.name }} {
+        # lb_strategy_method;
+        {% for server in rp.servers %}
+        server {{ server }};
+        {% endfor %}
+    }
+    
+    server {
+        location / {
+            proxy_pass http://{{ rp.name }};
+        }
+    }
+}
+        </code></pre>
+    </div>
+    
+    <a href="/rp/list" class="btn btn-secondary mt-4">Retour à la liste</a>
+</div>
+{% endblock %}

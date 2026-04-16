@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Ajouter un Reverse Proxy{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Ajouter un nouveau Reverse Proxy</h2>
+    <hr>
+    
+    <form method="POST" action="/rp/create" class="mt-4" style="max-width: 500px;">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom du backend (Upstream)</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="ex: backend_app_3" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="servers" class="form-label">Liste des serveurs</label>
+            <textarea class="form-control" id="servers" name="servers" rows="3" placeholder="ex: api1.domaine.fr, api2.domaine.fr" required></textarea>
+            <div class="form-text text-warning">Séparez chaque adresse de serveur par une virgule.</div>
+        </div>
+        
+        <button type="submit" class="btn btn-success">Ajouter la configuration</button>
+        <a href="/rp/list" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

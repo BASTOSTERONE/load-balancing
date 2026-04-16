@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "name": "Site Principal Vitrine",
+        "root": "/www/data",
+        "error_page": "/error-page.html",
+        "error_root": "/var/www/error"
+    }
+]

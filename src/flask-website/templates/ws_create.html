@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Ajouter un Serveur Web{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Nouveau Serveur Web</h2>
+    <hr>
+    <form method="POST" action="/ws/create" class="mt-4" style="max-width: 500px;">
+        <div class="mb-3">
+            <label class="form-label">Nom du site</label>
+            <input type="text" class="form-control" name="name" placeholder="ex: Site Vitrine" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dossier Racine (root)</label>
+            <input type="text" class="form-control" name="root" placeholder="ex: /www/data" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fichier page d'erreur</label>
+            <input type="text" class="form-control" name="error_page" placeholder="ex: /error-page.html" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dossier des erreurs</label>
+            <input type="text" class="form-control" name="error_root" placeholder="ex: /var/www/error" required>
+        </div>
+        <button type="submit" class="btn btn-success">Ajouter</button>
+        <a href="/ws/list" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

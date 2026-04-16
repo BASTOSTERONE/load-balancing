@@ -25,15 +25,42 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ url_for('start') }}">Accueil</a>
                         </li>
-                    </ul>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLB" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Load-balancers
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownLB">
+                                <li><a class="dropdown-item" href="/lb/list">Liste load-balancers</a></li>
+                                <li><a class="dropdown-item" href="/lb/create">Créer load-balancer</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRP" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Reverse-proxys
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownRP">
+                                <li><a class="dropdown-item" href="/rp/list">Liste reverse-proxys</a></li>
+                                <li><a class="dropdown-item" href="/rp/create">Créer reverse-proxy</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownWS" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Serveurs web
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownWS">
+                                <li><a class="dropdown-item" href="/ws/list">Liste serveurs web</a></li>
+                                <li><a class="dropdown-item" href="/ws/create">Créer serveur web</a></li>
+                            </ul>
+                        </li>
+                        </ul>
                 </div>
             </div>
         </nav>
     </header>
 
     <section>
-        <div class="container">
-            <div class="row">
+        <div class="container mt-3"> <div class="row">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ url_for('start') }}">Home</a></li>
@@ -44,6 +71,7 @@
         </div>
         {% block content %}{% endblock %}
     </section>
+    
     <footer>
         <nav class="navbar fixed-bottom navbar-light bg-light">
             <div class="container-fluid">
