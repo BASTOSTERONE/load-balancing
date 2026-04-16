@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import json
 import os
+import re
 
 app = Flask(__name__)
 
@@ -41,6 +42,15 @@ def create_loadbalancer():
     file_path = os.path.join(os.path.dirname(__file__), 'data', 'loadbalancer.json')
     try:
         new_data = request.json
+
+        if not new_data.get('name') or not new_data.get('ip_bind') or not new_data.get('pass'):
+            return jsonify({"error": "Tous les champs sont obligatoires"}), 400
+            
+        if not re.match(r"^([0-9]{1,3}\.){3}[0-9]{1,3}$", new_data['ip_bind']):
+            return jsonify({"error": "Format d'adresse IP invalide"}), 400
+            
+        if not new_data['pass'].startswith("http"):
+            return jsonify({"error": "La redirection doit être une URL (http://...)"}), 400
         
         with open(file_path, 'r') as file:
             data = json.load(file)

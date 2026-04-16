@@ -5,9 +5,18 @@
 {% block content %}
 <div class="container mt-5">
     <h2>Configuration générée : {{ lb.name }}</h2>
+    <div class="d-flex gap-3 mt-4">
+        <a href="/lb/list" class="btn btn-secondary">Retour à la liste</a>
+        
+        <a href="/lb/download/{{ lb.id }}" class="btn" style="background-color: #6f42c1; color: white; border-color: #6f42c1;">
+            Télécharger le fichier .conf
+        </a>
+    </div>
+   
+
     <hr>
     
-    <div class="card bg-dark text-light p-4 shadow">
+    <div class="card bg-dark text-light p-4 shadow mb-5">
         <pre><code>
 # Configuration générée pour : {{ lb.name }}
 
@@ -33,8 +42,27 @@ http {
     }
 }
         </code></pre>
+
     </div>
     
-    <a href="/lb/list" class="btn btn-secondary mt-4">Retour à la liste</a>
+    <h4 class="mt-5">Mise en production (Docker)</h4>
+    <p class="text-muted">Copiez-collez ces commandes sur votre serveur pour déployer ce Load Balancer.</p>
+    
+    <div class="card bg-dark text-success p-3 shadow mb-4" style="font-family: monospace;">
+        <div class="mb-3">
+            <span class="text-light"># 1. Créez le fichier de configuration Nginx</span><br>
+            nano {{ lb.name|lower|replace(' ', '-') }}.conf
+        </div>
+        
+        <div>
+            <span class="text-light"># 2. Lancez le conteneur Nginx avec ce fichier</span><br>
+            docker run -d \<br>
+            &nbsp;&nbsp;--name {{ lb.name|lower|replace(' ', '-') }} \<br>
+            &nbsp;&nbsp;-p 80:80 \<br>
+            &nbsp;&nbsp;-v $(pwd)/{{ lb.name|lower|replace(' ', '-') }}.conf:/etc/nginx/nginx.conf:ro \<br>
+            &nbsp;&nbsp;nginx
+        </div>
+    </div>
+    
 </div>
 {% endblock %}

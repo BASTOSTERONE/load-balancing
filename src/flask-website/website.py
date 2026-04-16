@@ -1,7 +1,12 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, Response, session
 import requests
 
 app = Flask(__name__)
+
+app.secret_key = "six_seven" 
+
+ADMIN_USER = "root"
+ADMIN_PASS = "root123"
 
 API_URL = "http://127.0.0.1:5001"
 
@@ -67,6 +72,45 @@ def delete_lb(id):
     except requests.exceptions.ConnectionError:
         return "Erreur de connexion à l'API."
     
+
+@app.route('/lb/download/<id>')
+def download_lb(id):
+    response = requests.get(f"{API_URL}/config/lb/{id}")
+    if response.status_code != 200:
+        return "Erreur de récupération", 404
+        
+    lb = response.json()
+    
+    nginx_content = f"""# Configuration générée pour : {lb.get('name')}
+http {{
+    server_tokens off;
+
+    server {{
+        listen 80;
+        server_name {lb.get('ip_bind')}; 
+
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-Content-Type-Options "nosniff";
+        add_header X-XSS-Protection "1; mode=block";
+
+        location / {{
+            proxy_pass {lb.get('pass')};
+
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }}
+    }}
+}}"""
+
+    safe_filename = lb.get('name').lower().replace(' ', '-') + ".conf"
+
+    return Response(
+        nginx_content,
+        mimetype="text/plain",
+        headers={"Content-disposition": f"attachment; filename={safe_filename}"}
+    )
+
 
 # ==========================================
 # PARTIE REVERSE PROXY
@@ -156,6 +200,31 @@ def delete_ws(id):
     requests.delete(f"{API_URL}/config/ws/{id}")
     return redirect('/ws/list')
 
+# --- SYSTEME D'AUTHENTIFICATION ---
+
+@app.before_request
+def require_login():
+    allowed_routes = ['login', 'static']
+    
+    if request.endpoint not in allowed_routes and not session.get('logged_in'):
+        return redirect('/login')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form.get('username') == ADMIN_USER and request.form.get('password') == ADMIN_PASS:
+            session['logged_in'] = True
+            return redirect('/')
+        else:
+            error = "Identifiants incorrects. Veuillez réessayer."
+            
+    return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect('/login')
 
 
 if __name__ == '__main__':
